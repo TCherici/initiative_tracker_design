@@ -4,6 +4,7 @@
 </svelte:head>
 
 <script>
+  import overlayPNG from '../assets/overlay.png'
 	import {onMount} from 'svelte'
 
 	let img, cropper;
@@ -20,19 +21,20 @@
         height: 430,
     }
 		cropper = new Cropper(img, {
-      autoCropArea: 0,
+      viewMode: 0,
+      autoCropArea: 1,
       guides: false,
       center: true,
       highlight: false,
       modal: true,
       center: false,
-
       cropBoxMovable: false,
       cropBoxResizable: false,
       dragMode: 'move',
       toggleDragModeOnDblclick: false,
       ready: function () {
           cropper.setCropBoxData(default_cropper_box_values)
+          cropper.zoomTo(1)
       },
 			crop(event) {
 			},
@@ -42,9 +44,14 @@
 
 <!-- Wrap the image or canvas element with a block element (container) -->
 <div class="portrait-wrapper">
+  <img src={overlayPNG} class="overlay" alt="Tracker portrait"/>
   <div class="portrait">
     <img bind:this={img} src="https://cdn1-www.dogtime.com/assets/uploads/2011/03/puppy-development.jpg" alt="">
   </div>
+
+  <input type="file" id="image-input" style="display: none">
+  <button class="change-image" id="change-image-button">Select Image</button>
+  <input id="character-name-display" class="name-input" value="Character Name" maxlength="12">
 </div>
 
 <style>
@@ -54,7 +61,7 @@
 		max-width: 100%;
 	}
 
-  .portrait_wrapper {
+  .portrait-wrapper {
     margin: auto;
     position: relative;
     margin-top:100px;
@@ -72,6 +79,46 @@
       top: 0;
       max-width: 300px;
       max-height: 500px;
+  }
+
+  .overlay {
+      margin: auto;
+      pointer-events: none;
+      position: absolute;
+      bottom:0;
+      left: 0;
+      right:0;
+      top: 10%;
+      scale: 150%;
+      /* opacity: .7; */
+      z-index: 10;
+  }
+
+  .change-image {
+      margin: auto;
+      position: absolute;
+      right: 30px;
+      top: 30px;
+      width: 150px;
+      height: 50px;
+      font-size: medium;
+      opacity: 0.4;
+  }
+
+  .name-input {
+    position: absolute;
+    margin: auto;
+    bottom:0;
+    left: 0;
+    right:0;
+    top:70%;
+    width: 80%;
+    max-width: auto;
+    font-size: xx-large;
+    text-align: center;
+    background-color: #00000000;
+    color: white;
+    border: 0px;
   }
 
 </style>
