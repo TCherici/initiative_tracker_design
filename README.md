@@ -1,3 +1,3 @@
-# initiative_tracker_d
+# Initiative Tracker Design
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-t2wysc)
+visit glassstaff.com to get your own set of initiative trackers!
