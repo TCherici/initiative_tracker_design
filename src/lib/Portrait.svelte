@@ -6,6 +6,7 @@
 <script>
   import overlayPNG from '../assets/overlay.png'
 	import {onMount} from 'svelte'
+  import ImageSelector from './ImageSelector.svelte'
 
 	let img, cropper;
 
@@ -21,7 +22,7 @@
         height: 430,
     }
 		cropper = new Cropper(img, {
-      viewMode: 0,
+      // viewMode: 0,
       autoCropArea: 1,
       guides: false,
       center: true,
@@ -46,11 +47,9 @@
 <div class="portrait-wrapper">
   <img src={overlayPNG} class="overlay" alt="Tracker portrait"/>
   <div class="portrait">
-    <img bind:this={img} src="https://cdn1-www.dogtime.com/assets/uploads/2011/03/puppy-development.jpg" alt="">
+    <img bind:this={img} src="./assets/parrot.jpg" alt="">
   </div>
-
-  <input type="file" id="image-input" style="display: none">
-  <button class="change-image" id="change-image-button">Select Image</button>
+  <ImageSelector {cropper}/>
   <input id="character-name-display" class="name-input" value="Character Name" maxlength="12">
 </div>
 
@@ -92,17 +91,6 @@
       scale: 150%;
       /* opacity: .7; */
       z-index: 10;
-  }
-
-  .change-image {
-      margin: auto;
-      position: absolute;
-      right: 30px;
-      top: 30px;
-      width: 150px;
-      height: 50px;
-      font-size: medium;
-      opacity: 0.4;
   }
 
   .name-input {
