@@ -25,21 +25,21 @@
 
 <style>
 	.upload{
-      margin: auto;
-      position: absolute;
-      right: 30px;
-      top: 30px;
-      width: 50px;
-      height: 50px;
-      font-size: large;
-      color: rgba(255, 255, 255, 0.8);
-      background-color: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    margin: auto;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 50px;
+    height: 50px;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.1);
 	}
   button:hover {
     color: rgba(255, 255, 255, 1.0);
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 </style>
