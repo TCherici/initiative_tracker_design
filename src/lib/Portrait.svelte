@@ -1,13 +1,9 @@
-<svelte:head>
-	<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-</svelte:head>
-
 <script>
   import overlayPNG from '../assets/overlay.png'
   import parrot from '../assets/parrot.jpg'
 	import {onMount} from 'svelte'
   import ImageSelector from './ImageSelector.svelte'
+  import Cropper from 'cropperjs';
 
 	let img, cropper;
 
@@ -22,8 +18,10 @@
 	})
 	
 	function initCropper(){
+    Cropper.noConflict()
 		cropper = new Cropper(img, {
       viewMode: 0,
+      autoCrop: false,
       autoCropArea: 1,
       guides: false,
       center: true,
@@ -35,17 +33,13 @@
       dragMode: 'move',
       toggleDragModeOnDblclick: false,
       ready: function () {
-        console.log(default_cropper_box_values)
-        cropper.setCropBoxData(default_cropper_box_values)
+        cropper.setCropBoxData(default_cropper_box_values);
       },
-			crop(event) {
-        console.log('crop')
-			},
 		});
 	}
 
   function changeImage(event){
-    cropper.replace(event.detail.image,)
+    cropper.replace(event.detail.image)
   }
   
 </script>
