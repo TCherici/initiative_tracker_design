@@ -2,15 +2,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
-	let  avatar, fileinput;
-  export let cropper;
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
+	
+  let  avatar, fileinput;
+  
 	const onFileSelected =(e)=>{
   let image = e.target.files[0];
   let reader = new FileReader();
   reader.readAsDataURL(image);
   reader.onload = e => {
-    cropper.replace(e.target.result, );
+    dispatch('change_image', {image: e.target.result})
   };
   }
 </script>
@@ -26,9 +29,17 @@
       position: absolute;
       right: 30px;
       top: 30px;
-      width: 150px;
+      width: 50px;
       height: 50px;
-      font-size: medium;
-      color: red;
+      font-size: large;
+      color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 	}
+  button:hover {
+    color: rgba(255, 255, 255, 1.0);
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 </style>

@@ -5,24 +5,25 @@
 
 <script>
   import overlayPNG from '../assets/overlay.png'
+  import parrot from '../assets/parrot.jpg'
 	import {onMount} from 'svelte'
   import ImageSelector from './ImageSelector.svelte'
 
 	let img, cropper;
 
+  const default_cropper_box_values = {
+    left: 0,
+    top: 50,
+    width: 330,
+    height: 430,
+  }
 	onMount(() => {
 	  img.addEventListener('load', initCropper);
 	})
 	
 	function initCropper(){
-    const default_cropper_box_values = {
-        left: 0,
-        top: 50,
-        width: 330,
-        height: 430,
-    }
 		cropper = new Cropper(img, {
-      // viewMode: 0,
+      viewMode: 0,
       autoCropArea: 1,
       guides: false,
       center: true,
@@ -34,22 +35,28 @@
       dragMode: 'move',
       toggleDragModeOnDblclick: false,
       ready: function () {
-          cropper.setCropBoxData(default_cropper_box_values)
-          cropper.zoomTo(1)
+        console.log(default_cropper_box_values)
+        cropper.setCropBoxData(default_cropper_box_values)
       },
 			crop(event) {
+        console.log('crop')
 			},
-		});		
+		});
 	}
+
+  function changeImage(event){
+    cropper.replace(event.detail.image,)
+  }
+  
 </script>
 
 <!-- Wrap the image or canvas element with a block element (container) -->
 <div class="portrait-wrapper">
   <img src={overlayPNG} class="overlay" alt="Tracker portrait"/>
   <div class="portrait">
-    <img bind:this={img} src="./assets/parrot.jpg" alt="">
+    <img bind:this={img} src={parrot} alt="">
   </div>
-  <ImageSelector {cropper}/>
+  <ImageSelector on:change_image={changeImage}/>
   <input id="character-name-display" class="name-input" value="Character Name" maxlength="12">
 </div>
 
