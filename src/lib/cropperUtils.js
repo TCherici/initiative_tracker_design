@@ -46,14 +46,18 @@ export async function getCroppedImg(
   canvas.width = image.width;
   canvas.height = image.height;
 
-  // translate canvas context to a central location to allow rotating and flipping around the center
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
-  ctx.translate(-image.width / 2, -image.height / 2);
-
+  // draw uncropped image to extract its data values
   ctx.drawImage(image, 0, 0);
+  var data = ctx.getImageData(0, 0, image.width, image.height);
 
-  const data = ctx.getImageData(0, 0, image.width, image.height);
+  // Create temporary canvas and new image to keep transparency info
+  var tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = image.width
+  tmpCanvas.height = image.height
+  tmpCanvas.getContext('2d').putImageData(data,0,0);
+  var img = new Image();
+  img.src = tmpCanvas.toDataURL();
+  
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
@@ -61,14 +65,12 @@ export async function getCroppedImg(
   // create background rectangle over all pixelCrop range
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, pixelCrop.width, pixelCrop.height);
-  // paste generated rotate image at the top left corner
-  console.log(pixelCrop.x, pixelCrop.y);
-  ctx.putImageData(
-    data,
+
+  // draw cropped/scaled image over canvas
+  ctx.drawImage(
+    img,
     -pixelCrop.x,
     -pixelCrop.y,
-    0,
-    0,
     image.width,
     image.height
   );
