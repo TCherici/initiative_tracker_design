@@ -7,32 +7,11 @@ export const createImage = (url) =>
     image.src = url;
   });
 
-export function getRadianAngle(degreeValue) {
-  return (degreeValue * Math.PI) / 180;
-}
 
-/**
- * Returns the new bounding area of a rotated rectangle.
- */
-export function rotateSize(width, height, rotation) {
-  const rotRad = getRadianAngle(rotation);
-
-  return {
-    width:
-      Math.abs(Math.cos(rotRad) * width) + Math.abs(Math.sin(rotRad) * height),
-    height:
-      Math.abs(Math.sin(rotRad) * width) + Math.abs(Math.cos(rotRad) * height),
-  };
-}
-
-/**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- */
 export async function getCroppedImg(
   imageSrc,
   pixelCrop,
   backgroundColor,
-  flip = { horizontal: false, vertical: false }
 ) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
@@ -57,7 +36,6 @@ export async function getCroppedImg(
   tmpCanvas.getContext('2d').putImageData(data,0,0);
   var img = new Image();
   img.src = tmpCanvas.toDataURL();
-  
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
@@ -67,23 +45,15 @@ export async function getCroppedImg(
   ctx.fillRect(0, 0, pixelCrop.width, pixelCrop.height);
 
   // draw cropped/scaled image over canvas
+  await img.decode() // wait for image decoding before drawing it, or it will just be skipped
   ctx.drawImage(
-    img,
-    -pixelCrop.x,
-    -pixelCrop.y,
-    image.width,
-    image.height
+      img,
+      -pixelCrop.x,
+      -pixelCrop.y,
+      image.width,
+      image.height
   );
-
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
-
-  // As a blob
-  return new Promise((resolve, reject) => {
-    canvas.toBlob((file) => {
-      resolve(URL.createObjectURL(file));
-    }, 'image/jpeg');
-  });
+  return canvas.toDataURL('image/jpeg')
 }
 
 export async function createPortraitCanvas(imageSrc, name) {

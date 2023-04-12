@@ -9,6 +9,7 @@
 
   let croppedImage = null
   let portraitCanvas = null
+  let backCanvas = null
 
   async function createSheet(){
     console.log("Creating Sheet")
@@ -23,15 +24,13 @@
       // Add front portrait
       croppedImage = await getCroppedImg(currentTrackerInfo.image, currentTrackerInfo.cropData.pixels, currentTrackerInfo.backgroundColor)
       portraitCanvas = await createPortraitCanvas(croppedImage, currentTrackerInfo.name)
+      // backCanvas = await createBackCanvas(currentTrackerInfo.name)
 
       doc.addImage(portraitCanvas, ...(currentTrackerPosition.getFrontLoc()))
-      // doc.setTextColor(currentTrackerInfo.nameColor)
-      // doc.text(currentTrackerInfo.name, ...(currentTrackerPosition.getFrontNameLoc()), {align: "center"})
       doc.rect(...(currentTrackerPosition.getFrontLoc()))
-      // // Add back portrait
+      // Add back portrait
+      // doc.addImage(portraitCanvas, ...(currentTrackerPosition.getBackLoc()))
       doc.rect(...(currentTrackerPosition.getBackLoc()))
-      doc.setTextColor('#000')
-      doc.text(currentTrackerInfo.name, ...(currentTrackerPosition.getBackNameLoc()), {align: "center"})
     }
     
     doc.save('initiative_tracker_characters.pdf')
@@ -58,8 +57,8 @@
         <Tracker trackerIdx={idx}/>
       {/each}
     </div>
-    <!-- {#if croppedImage}
-      <img src={croppedImage} class='test-crop-img'/>
+    <!-- {#if portraitCanvas}
+      <img src={portraitCanvas} class='test-crop-img'/>
     {/if} -->
   </div>
 </body>
