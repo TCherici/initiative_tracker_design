@@ -52,8 +52,12 @@ export function removeTracker(idxToRemove) {
 const positions = [
   [20, 20],
   [120, 20],
-  [20, 120],
-  [120, 120],
+  [20, 80],
+  [120, 80],
+  [20, 140],
+  [120, 140],
+  [20, 200],
+  [120, 200],
 ];
 
 export class TrackerPosition {
