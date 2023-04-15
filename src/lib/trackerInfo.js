@@ -70,7 +70,7 @@ export class TrackerPosition {
   }
 
   getFrontLoc() {
-    return [this.x, this.y, this.width, this.front_height];
+    return [this.x, this.y, this.width, this.front_height]
   }
 
   getFrontNameLoc() {

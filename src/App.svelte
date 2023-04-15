@@ -49,7 +49,7 @@
 <body>
 
   <div class="container">
-    <div class="side-menu">
+    <div class="trackers-menu">
       <div class="selector">
        <Selector/>
       </div>
@@ -57,52 +57,71 @@
         <button class="create-sheet" on:click={async () =>{ await createSheet()}}>Print Sheet</button>
       </div>
     </div>
-    <div class="tracker">
+    <div class="trackers-wrapper">
       {#each $trackers as trackerInfo, idx (trackerInfo)}
         <Tracker trackerIdx={idx}/>
       {/each}
     </div>
-    <!-- {#if portraitCanvas}
-      <img src={portraitCanvas} class='test-crop-img'/>
-    {/if} -->
   </div>
 </body>
 
 <style>
-.test-crop-img{
-  position: absolute;
-  left: 300px;
-  z-index: -1000;
-}
 
 .container{
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
+  display: flex;
+  place-content: center;
+  width: 95vw;
 }
-.side-menu{
-  position:fixed;
-  left:5%;
-  width: 20%;
-  min-width: 150px;
-  max-width: 200px;
+.trackers-menu{
+ max-width:300px;
+ min-width: 220px;
+ height:90vh;
+ width: 25%;
+ position: relative;
 }
+
 .selector{
   margin: auto;
 }
 .create-sheet-container{
   margin: auto;
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  right: 0;
 }
 .create-sheet{
-  margin: 10px auto;
-  width: 100%;
-  font-size: 26px;
+ margin:auto;
+ font-size:26px;
 }
 
-.tracker{
-  position: relative;
-  width: 80%;
-  margin-top: 25px;
-  margin-left: 20%;
+
+.trackers-wrapper{
+ min-width:480px;
+ overflow-x:hidden;
+ position: relative;
+ width: 80%;
+ display: flex;
+ place-content: center;
 }
+/* Media query for mobile devices */
+@media only screen and (max-width: 1150px) {
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column; /* stacks content vertically */
+  }
+  
+  .portraits-menu {
+    width: 100%; /* takes up full width of the screen */
+  }
+  
+  .portrait {
+    width: 100%; /* takes up full width of the screen */
+    /* any other styles for the portrait on mobile */
+  }
+}
+
 </style>
