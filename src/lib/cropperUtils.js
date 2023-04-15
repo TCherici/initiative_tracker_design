@@ -7,32 +7,11 @@ export const createImage = (url) =>
     image.src = url;
   });
 
-export function getRadianAngle(degreeValue) {
-  return (degreeValue * Math.PI) / 180;
-}
 
-/**
- * Returns the new bounding area of a rotated rectangle.
- */
-export function rotateSize(width, height, rotation) {
-  const rotRad = getRadianAngle(rotation);
-
-  return {
-    width:
-      Math.abs(Math.cos(rotRad) * width) + Math.abs(Math.sin(rotRad) * height),
-    height:
-      Math.abs(Math.sin(rotRad) * width) + Math.abs(Math.cos(rotRad) * height),
-  };
-}
-
-/**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- */
 export async function getCroppedImg(
   imageSrc,
   pixelCrop,
   backgroundColor,
-  flip = { horizontal: false, vertical: false }
 ) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
@@ -46,14 +25,17 @@ export async function getCroppedImg(
   canvas.width = image.width;
   canvas.height = image.height;
 
-  // translate canvas context to a central location to allow rotating and flipping around the center
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
-  ctx.translate(-image.width / 2, -image.height / 2);
-
+  // draw uncropped image to extract its data values
   ctx.drawImage(image, 0, 0);
+  var data = ctx.getImageData(0, 0, image.width, image.height);
 
-  const data = ctx.getImageData(0, 0, image.width, image.height);
+  // Create temporary canvas and new image to keep transparency info
+  var tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = image.width
+  tmpCanvas.height = image.height
+  tmpCanvas.getContext('2d').putImageData(data,0,0);
+  var img = new Image();
+  img.src = tmpCanvas.toDataURL();
   // set canvas width to final desired crop size - this will clear existing context
   canvas.width = pixelCrop.width;
   canvas.height = pixelCrop.height;
@@ -61,27 +43,17 @@ export async function getCroppedImg(
   // create background rectangle over all pixelCrop range
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0, 0, pixelCrop.width, pixelCrop.height);
-  // paste generated rotate image at the top left corner
-  console.log(pixelCrop.x, pixelCrop.y);
-  ctx.putImageData(
-    data,
-    -pixelCrop.x,
-    -pixelCrop.y,
-    0,
-    0,
-    image.width,
-    image.height
+
+  // draw cropped/scaled image over canvas
+  await img.decode() // wait for image decoding before drawing it, or it will just be skipped
+  ctx.drawImage(
+      img,
+      -pixelCrop.x,
+      -pixelCrop.y,
+      image.width,
+      image.height
   );
-
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
-
-  // As a blob
-  return new Promise((resolve, reject) => {
-    canvas.toBlob((file) => {
-      resolve(URL.createObjectURL(file));
-    }, 'image/jpeg');
-  });
+  return canvas.toDataURL('image/jpeg')
 }
 
 export async function createPortraitCanvas(imageSrc, name) {

@@ -7,7 +7,9 @@
 	import {getCroppedImg, createPortraitCanvas} from "./lib/cropperUtils.js";
   import Selector from './lib/selector/Selector.svelte'
 
+  let croppedImage = null
   let portraitCanvas = null
+  let backCanvas = null
 
   async function createSheet(){
     console.log("Creating Sheet")
@@ -18,22 +20,19 @@
     let currentTrackers = get(trackers)
     for (let i = 0; i < currentTrackers.length; i++) {
       const currentTrackerInfo = get(currentTrackers[i])
-      console.log(currentTrackerInfo)
       let currentTrackerPosition = new TrackerPosition(i)
-      console.log(currentTrackerInfo.backgroundColor)
       // Add front portrait
-      let croppedImage = await getCroppedImg(currentTrackerInfo.image, currentTrackerInfo.cropData.pixels, currentTrackerInfo.backgroundColor)
+      croppedImage = await getCroppedImg(currentTrackerInfo.image, currentTrackerInfo.cropData.pixels, currentTrackerInfo.backgroundColor)
       portraitCanvas = await createPortraitCanvas(croppedImage, currentTrackerInfo.name)
+      // backCanvas = await createBackCanvas(currentTrackerInfo.name)
 
       doc.addImage(portraitCanvas, ...(currentTrackerPosition.getFrontLoc()))
-      // doc.setTextColor(currentTrackerInfo.nameColor)
-      // doc.text(currentTrackerInfo.name, ...(currentTrackerPosition.getFrontNameLoc()), {align: "center"})
       doc.rect(...(currentTrackerPosition.getFrontLoc()))
-      // // Add back portrait
+      // Add back portrait
+      // doc.addImage(portraitCanvas, ...(currentTrackerPosition.getBackLoc()))
       doc.rect(...(currentTrackerPosition.getBackLoc()))
-      doc.setTextColor('#000')
-      doc.text(currentTrackerInfo.name, ...(currentTrackerPosition.getBackNameLoc()), {align: "center"})
     }
+    
     doc.save('initiative_tracker_characters.pdf')
     console.log("Sheet created")
   }
@@ -58,10 +57,19 @@
         <Tracker trackerIdx={idx}/>
       {/each}
     </div>
+    <!-- {#if portraitCanvas}
+      <img src={portraitCanvas} class='test-crop-img'/>
+    {/if} -->
   </div>
 </body>
 
 <style>
+.test-crop-img{
+  position: absolute;
+  left: 300px;
+  z-index: -1000;
+}
+
 .container{
   width: 100vw;
   height: 100vh;

@@ -14,7 +14,7 @@
   let trackerStore = $trackers[trackerIdx]
 
 </script>
-<button class="selector-item" class:selected={isSelected} on:click={changeSelection(trackerIdx)}>
+<button class="selector-item" class:selected={isSelected} on:click={() => changeSelection()}>
   <div class="name">
   {$trackerStore.name}
   </div>
