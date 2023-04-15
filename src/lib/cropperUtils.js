@@ -56,14 +56,17 @@ export async function getCroppedImg(
   return canvas.toDataURL('image/jpeg')
 }
 
+const resolutionRatio = 20
+
+
 export async function createPortraitCanvas(imageSrc, name) {
   const image = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
-  canvas.width = 330;
-  canvas.height = 430;
+  canvas.width = 33 * resolutionRatio;
+  canvas.height = 43 * resolutionRatio;
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  addName(canvas, name);
+  addName(canvas, name, 0.9);
   return new Promise((resolve, reject) => {
     canvas.toBlob((file) => {
       resolve(URL.createObjectURL(file));
@@ -71,13 +74,32 @@ export async function createPortraitCanvas(imageSrc, name) {
   });
 }
 
-function addName(portraitCanvas, name) {
+
+export function createBackCanvas(name, backgroundColor) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 33 * resolutionRatio;
+  canvas.height = 10 * resolutionRatio;
+  // create background rectangle over all pixelCrop range
+  ctx.fillStyle = backgroundColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  addName(canvas, name, 0.6)
+  return canvas
+}
+
+
+function addName(portraitCanvas, name, positionFromTop) {
   const ctx = portraitCanvas.getContext('2d');
-  ctx.font = 'Comic Sans';
+  ctx.font = '60px Rowdies';
+
+  const fontMatch = /(?<value>\d+\.?\d*)/;
+  ctx.font = ctx.font.replace(fontMatch, resolutionRatio*3);
+  console.log(ctx.font)
+
   ctx.textAlign = 'center';
-  ctx.font = 'bold 32px serif';
   ctx.fillStyle = 'white';
-  ctx.fillText(name, portraitCanvas.width / 2, portraitCanvas.height * 0.9);
-  ctx.strokeText(name, portraitCanvas.width / 2, portraitCanvas.height * 0.9);
+  ctx.fillText(name, portraitCanvas.width / 2, portraitCanvas.height * positionFromTop, portraitCanvas.width*.95);
+  ctx.lineWidth = 2;
+  ctx.strokeText(name, portraitCanvas.width / 2, portraitCanvas.height * positionFromTop, portraitCanvas.width*.95);
   return portraitCanvas;
 }

@@ -14,7 +14,7 @@
 <div class="back-portrait-wrapper">
   <img src={overlayPNG} class="overlay" alt="Tracker portrait"/>
   <div class="back-portrait" style="--background-color: {$trackerStore.backgroundColor}">
-    <input class="name-input" bind:value={$trackerStore.name} maxlength="20">
+    <input class="name-input" bind:value={$trackerStore.name} maxlength="12">
     <input type="color" bind:value={$trackerStore.backgroundColor} class="background-color-changer">
   </div>
 </div>
@@ -71,7 +71,6 @@
     height: 50px;
     max-width: auto;
     font-size: 32px;
-    font-family: "Baskerville";
     font-weight: bold;
     text-align: center;
     background-color: #00000000;

@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store';
 import parrot from '../assets/parrot.jpg';
+import empty from '../assets/empty.png';
 
 export let selectedTracker = writable(0)
 
@@ -13,8 +14,8 @@ export let trackers = writable([
 ]);
 
 const defaultTracker = {
-  name: 'Character Name',
-  image: parrot,
+  name: '',
+  image: empty,
   cropData: null,
   backgroundColor: '#FFFFFF',
 };
@@ -51,8 +52,12 @@ export function removeTracker(idxToRemove) {
 const positions = [
   [20, 20],
   [120, 20],
-  [20, 120],
-  [120, 120],
+  [20, 80],
+  [120, 80],
+  [20, 140],
+  [120, 140],
+  [20, 200],
+  [120, 200],
 ];
 
 export class TrackerPosition {

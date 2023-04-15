@@ -8,7 +8,9 @@
 </script>
 
 
-<button class="reset" on:click={()=>{dispatch('reset_cropper', {});}}><i class="fa fa-refresh"></i></button>
+<button class="reset" on:click={()=>{dispatch('reset_cropper', {});}}>
+  <span class="material-symbols-outlined">refresh</span>
+</button>
 
 <style>
 .reset{
