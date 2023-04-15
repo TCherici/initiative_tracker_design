@@ -90,9 +90,13 @@ export function createBackCanvas(name, backgroundColor) {
 
 function addName(portraitCanvas, name, positionFromTop) {
   const ctx = portraitCanvas.getContext('2d');
-  ctx.font = 'Comic Sans';
+  ctx.font = '60px Rowdies';
+
+  const fontMatch = /(?<value>\d+\.?\d*)/;
+  ctx.font = ctx.font.replace(fontMatch, resolutionRatio*3);
+  console.log(ctx.font)
+
   ctx.textAlign = 'center';
-  ctx.font = 'bold '+resolutionRatio*3+'px serif';
   ctx.fillStyle = 'white';
   ctx.fillText(name, portraitCanvas.width / 2, portraitCanvas.height * positionFromTop, portraitCanvas.width*.95);
   ctx.lineWidth = 2;

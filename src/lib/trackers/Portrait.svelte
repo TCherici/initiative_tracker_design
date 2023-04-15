@@ -57,7 +57,7 @@
   </div>
   <ImageSelector on:change_image={changeImage}/>
   <CropperResetter on:reset_cropper={resetCropper} />
-  <input class="name-input" bind:value={$trackerStore.name} maxlength="20">
+  <input class="name-input" bind:value={$trackerStore.name} maxlength="12">
 </div>
 
 <style>
@@ -107,11 +107,10 @@
     left: 0;
     right:0;
     top:75%;
-    width: 85%;
+    width: 90%;
     height: 50px;
     max-width: auto;
     font-size: 32px;
-    font-family: "Baskerville";
     font-weight: bold;
     text-align: center;
     background-color: #00000000;
