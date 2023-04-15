@@ -4,7 +4,7 @@
 
   import Tracker from './lib/trackers/Tracker.svelte'
   import {trackers, TrackerPosition, selectedTracker} from './lib/trackerInfo.js'
-	import {getCroppedImg, createPortraitCanvas} from "./lib/cropperUtils.js";
+	import {getCroppedImg, createPortraitCanvas, createBackCanvas} from "./lib/cropperUtils.js";
   import Selector from './lib/selector/Selector.svelte'
 
   let croppedImage = null
@@ -24,12 +24,12 @@
       // Add front portrait
       croppedImage = await getCroppedImg(currentTrackerInfo.image, currentTrackerInfo.cropData.pixels, currentTrackerInfo.backgroundColor)
       portraitCanvas = await createPortraitCanvas(croppedImage, currentTrackerInfo.name)
-      // backCanvas = await createBackCanvas(currentTrackerInfo.name)
+      backCanvas = await createBackCanvas(currentTrackerInfo.name, currentTrackerInfo.backgroundColor)
 
       doc.addImage(portraitCanvas, ...(currentTrackerPosition.getFrontLoc()))
       doc.rect(...(currentTrackerPosition.getFrontLoc()))
       // Add back portrait
-      // doc.addImage(portraitCanvas, ...(currentTrackerPosition.getBackLoc()))
+      doc.addImage(backCanvas, ...(currentTrackerPosition.getBackLoc()))
       doc.rect(...(currentTrackerPosition.getBackLoc()))
     }
     
