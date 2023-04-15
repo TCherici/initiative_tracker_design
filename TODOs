@@ -1,11 +1,13 @@
 
     -- MUSTDOs --
-Define positions up to 8
-Figure out layout on large screens
-    Change to DnD font
+layout
+    Figure out layout on small screens
     Add GlassStaff logo / url
+    Improve buttons
+
+Animate change in char
+
 
     -- NiceToHaves --
 Banner "Get your own set of trackers!"
 Background
-Animate change in char
