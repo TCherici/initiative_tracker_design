@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store';
 import parrot from '../assets/parrot.jpg';
+import empty from '../assets/empty.png';
 
 export let selectedTracker = writable(0)
 
@@ -13,8 +14,8 @@ export let trackers = writable([
 ]);
 
 const defaultTracker = {
-  name: 'Character Name',
-  image: parrot,
+  name: '',
+  image: empty,
   cropData: null,
   backgroundColor: '#FFFFFF',
 };

@@ -6,16 +6,15 @@
   $: currentSelectedTracker = $selectedTracker
 </script>
 
+
 <div class="tracker-list">
   {#each currentTrackers as trackerInfo, idx (trackerInfo)}
     <TrackerSelectorItem trackerIdx={idx}/>
   {/each}
 </div>
 <button class="add-tracker" on:click={addTracker}>
-  <div class="add-tracker-name">
-  Add Tracker
-  </div>
-  <span class="add-tracker-icon">➕</span>
+  <span class="material-symbols-outlined add-tracker-icon">add_circle</span>
+    Add Tracker
 </button>
 
 
@@ -25,17 +24,18 @@
   display: block;
 }
 .add-tracker{
-  display: block;
+  display: inline;
   margin: 10px auto;
   width: 100%
 }
-.add-tracker-name{
-  width: 80%;
+.add-tracker-icon{
+  width: 20%;
   float: left;
 }
-.add-tracker-icon{
-  width: 10%;
+.add-tracker-name{
+  width: 80%;
   float: right;
 }
+
 
 </style>

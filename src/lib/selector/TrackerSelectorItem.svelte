@@ -14,11 +14,16 @@
   let trackerStore = $trackers[trackerIdx]
 
 </script>
+
+
 <button class="selector-item" class:selected={isSelected} on:click={() => changeSelection()}>
   <div class="name">
   {$trackerStore.name}
   </div>
-  <span class="remove-item" on:click={() => removeTracker(trackerIdx)}>❌</span>
+    
+  <span class="material-symbols-outlined" on:click={() => removeTracker(trackerIdx)}>
+    delete
+  </span>
 </button>
 
 <style>
@@ -29,7 +34,12 @@
   }
   .selected {
     font-weight: bold;
-    background-color: bisque;
+    background-color: rgb(85, 44, 0);
+  }
+  @media (prefers-color-scheme: light) {
+    .selected {
+      background-color: bisque;
+    }
   }
   .name{
     width: 80%;

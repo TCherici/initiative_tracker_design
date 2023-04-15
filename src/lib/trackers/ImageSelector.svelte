@@ -19,7 +19,9 @@
 </script>
 
 
-<button class="upload" on:click={()=>{fileinput.click();}}><i class="fa fa-upload"></i></button>
+<button class="upload" on:click={()=>{fileinput.click();}}>
+  <span class="material-symbols-outlined">upload</span>
+</button>
 <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={fileinput} >
 
 

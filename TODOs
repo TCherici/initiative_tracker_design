@@ -2,9 +2,9 @@
     -- MUSTDOs --
 Text input size / match with sheet
 Define positions up to 8
-Add GlassStaff logo / url
 Figure out layout on large screens
-Change to DnD font
+    Change to DnD font
+    Add GlassStaff logo / url
 
     -- NiceToHaves --
 Banner "Get your own set of trackers!"
