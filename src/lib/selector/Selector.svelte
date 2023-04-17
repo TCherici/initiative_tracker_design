@@ -13,8 +13,7 @@
   {/each}
 </div>
 <button class="add-tracker" on:click={addTracker}>
-  <span class="material-symbols-outlined add-tracker-icon">add_circle</span>
-    Add Tracker
+  <span class="material-symbols-outlined add-tracker-icon">add_circle</span>Add Tracker
 </button>
 
 
@@ -32,10 +31,5 @@
   width: 20%;
   float: left;
 }
-.add-tracker-name{
-  width: 80%;
-  float: right;
-}
-
 
 </style>

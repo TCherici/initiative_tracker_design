@@ -1,6 +1,6 @@
 <script>
   import {selectedTracker, trackers, removeTracker} from '../trackerInfo.js'
-  import { get } from 'svelte/store';
+	import { get } from 'svelte/store';
 
   export let trackerIdx
   $: activeTrackerIdx = $selectedTracker
@@ -15,18 +15,26 @@
 
 </script>
 
+<div class="name">
+  <button class="selector-item" class:selected={isSelected} on:click={() => changeSelection()}>
+      {$trackerStore.name}
+  </button>
+  {#if $trackers.length > 1}
+    <span class="material-symbols-outlined remove-item-button" on:click={() => removeTracker(trackerIdx)}>cancel</span>
+  {/if}
+</div>
 
-<button class="selector-item" class:selected={isSelected} on:click={() => changeSelection()}>
-  <div class="name">
-  {$trackerStore.name}
-  </div>
-    
-  <span class="material-symbols-outlined" on:click={() => removeTracker(trackerIdx)}>
-    delete
-  </span>
-</button>
 
 <style>
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+  }
+
+
   .selector-item {
     display: block;
     margin: 10px auto;
@@ -34,19 +42,20 @@
   }
   .selected {
     font-weight: bold;
-    background-color: rgb(85, 44, 0);
+    background-color: #cca300;
   }
   @media (prefers-color-scheme: light) {
     .selected {
-      background-color: bisque;
+      background-color: #f0c417;
     }
   }
   .name{
-    width: 80%;
-    float:left;
+    margin: auto;
+    position: relative;
   }
-  .remove-item {
-    width: 10%;
-    float:right;
+  .remove-item-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
   }
 </style>

@@ -44,7 +44,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet"> 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <body>
 
@@ -54,7 +54,12 @@
        <Selector/>
       </div>
       <div class="create-sheet-container">
-        <button class="create-sheet" on:click={async () =>{ await createSheet()}}>Print Sheet</button>
+        <button class="create-sheet" on:click={async () =>{ await createSheet()}}>
+          <span class="material-symbols-outlined">
+            print
+          </span>
+          Print Sheet
+        </button>
       </div>
     </div>
     <div class="trackers-wrapper">
@@ -71,11 +76,11 @@
   display: flex;
   place-content: center;
   width: 95vw;
+  height:95vh;
 }
 .trackers-menu{
  max-width:300px;
  min-width: 220px;
- height:90vh;
  width: 25%;
  position: relative;
 }
@@ -85,10 +90,6 @@
 }
 .create-sheet-container{
   margin: auto;
-  position: absolute;
-  bottom: 40%;
-  left: 0;
-  right: 0;
 }
 .create-sheet{
  margin:auto;
@@ -98,7 +99,6 @@
 
 .trackers-wrapper{
  min-width:480px;
- overflow-x:hidden;
  position: relative;
  width: 80%;
  display: flex;
@@ -109,18 +109,19 @@
 }
 
 /* Media query for mobile devices */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 780px) {
   .container {
-    flex-direction: column; /* stacks content vertically */
+    flex-direction: column;
+    align-items: center;
+    place-content: start;
   }
   
-  .portraits-menu {
-    width: 100%; /* takes up full width of the screen */
+  .trackers-menu {
+    width: 100%;
   }
   
-  .portrait {
-    width: 100%; /* takes up full width of the screen */
-    /* any other styles for the portrait on mobile */
+  .trackers-wrapper {
+    width: 100%;
   }
 }
 
