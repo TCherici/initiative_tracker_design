@@ -44,49 +44,47 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet"> 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <body>
 
   <div class="container">
-    <div class="side-menu">
+    <div class="trackers-menu">
       <div class="selector">
        <Selector/>
       </div>
       <div class="create-sheet-container">
-        <button class="create-sheet" on:click={async () =>{ await createSheet()}}>Print Sheet</button>
+        <button class="create-sheet" on:click={async () =>{ await createSheet()}}>
+          <span class="material-symbols-outlined">
+            print
+          </span>
+          Print Sheet
+        </button>
       </div>
     </div>
-    <div class="tracker">
+    <div class="trackers-wrapper">
       {#each $trackers as trackerInfo, idx (trackerInfo)}
         <Tracker trackerIdx={idx}/>
       {/each}
     </div>
-    <!-- {#if portraitCanvas}
-      <img src={portraitCanvas} class='test-crop-img'/>
-    {/if} -->
   </div>
 </body>
 
 <style>
-.test-crop-img{
-  position: absolute;
-  left: 300px;
-  z-index: -1000;
-}
 
 .container{
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
+  display: flex;
+  place-content: center;
+  width: 95vw;
+  height:95vh;
 }
-.side-menu{
-  position:fixed;
-  left:5%;
-  width: 20%;
-  min-width: 150px;
-  max-width: 200px;
+.trackers-menu{
+ max-width:300px;
+ min-width: 220px;
+ width: 25%;
+ position: relative;
 }
+
 .selector{
   margin: auto;
 }
@@ -94,15 +92,37 @@
   margin: auto;
 }
 .create-sheet{
-  margin: 10px auto;
-  width: 100%;
-  font-size: 26px;
+ margin:auto;
+ font-size:26px;
 }
 
-.tracker{
-  position: relative;
-  width: 80%;
-  margin-top: 25px;
-  margin-left: 20%;
+
+.trackers-wrapper{
+ min-width:480px;
+ position: relative;
+ width: 80%;
+ display: flex;
+ place-content: center;
 }
+/* Media query for mobile devices */
+@media only screen and (max-width: 1150px) {
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 780px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    place-content: start;
+  }
+  
+  .trackers-menu {
+    width: 100%;
+  }
+  
+  .trackers-wrapper {
+    width: 100%;
+  }
+}
+
 </style>

@@ -68,12 +68,13 @@
 	}
 
   .portrait-wrapper {
-    margin: 50px;
-    margin-bottom: 170px;
-    display: inline-block;
-    position: relative;
     width: 330px;
     height: 430px;
+    margin: 40px;
+    margin-top: 90px;
+    margin-bottom: 150px;
+    display: inline-block;
+    position: relative;
   }
   .portrait {
       position: absolute;

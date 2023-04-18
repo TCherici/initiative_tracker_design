@@ -7,14 +7,14 @@ export let selectedTracker = writable(0)
 export let trackers = writable([
   writable({
     name: 'Character Name',
-    image: parrot,
+    image: empty,
     cropData: null,
     backgroundColor: '#FFFFFF',
   }),
 ]);
 
 const defaultTracker = {
-  name: '',
+  name: 'Character Name',
   image: empty,
   cropData: null,
   backgroundColor: '#FFFFFF',
@@ -70,7 +70,7 @@ export class TrackerPosition {
   }
 
   getFrontLoc() {
-    return [this.x, this.y, this.width, this.front_height];
+    return [this.x, this.y, this.width, this.front_height]
   }
 
   getFrontNameLoc() {

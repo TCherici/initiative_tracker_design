@@ -1,13 +1,15 @@
 
     -- MUSTDOs --
 layout
-    Figure out layout on small screens
     Add GlassStaff logo / url
     Improve buttons
+    Change icon to GlassStaff
+    remove parrot from first image
 
 Animate change in char
 
 
     -- NiceToHaves --
+Make name change also from menu
 Banner "Get your own set of trackers!"
 Background

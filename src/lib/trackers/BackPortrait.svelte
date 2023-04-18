@@ -28,12 +28,13 @@
 	}
 
   .back-portrait-wrapper {
-    margin: 20px;
-    margin-bottom: 170px;
-    display: inline-block;
-    position: relative;
     width: 330px;
     height: 430px;
+    margin: 40px;
+    margin-top: 90px;
+    margin-bottom: 150px;
+    display: inline-block;
+    position: relative;
   }
   .back-portrait {
       position: absolute;
