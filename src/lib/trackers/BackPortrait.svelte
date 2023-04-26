@@ -1,8 +1,6 @@
 
 <script>
   import overlayPNG from '../../assets/back_overlay.png'
-  import ImageSelector from './ImageSelector.svelte'
-  import CropperResetter from './CropperResetter.svelte'  
   import {trackers} from '../trackerInfo.js'
 
   export let trackerIdx

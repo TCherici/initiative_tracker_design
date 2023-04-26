@@ -2,6 +2,7 @@
   import { jsPDF } from "jspdf";
 	import { get } from 'svelte/store';
 
+  import logoHorizontal from './assets/front_overlay.png'
   import Tracker from './lib/trackers/Tracker.svelte'
   import {trackers, TrackerPosition, selectedTracker} from './lib/trackerInfo.js'
 	import {getCroppedImg, createPortraitCanvas, createBackCanvas} from "./lib/cropperUtils.js";
@@ -49,7 +50,7 @@
 <body>
   <div class="top-bar">
     <a href="https://www.glassstaff.com/" class="logo-horizontal">
-      <img src="src/assets/glassstaff-logo-horizontal.png" alt="www.glassstaff.com"/>
+      <img src={logoHorizontal} alt="www.glassstaff.com"/>
     </a>
   </div>
   <div class="container">
