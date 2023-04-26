@@ -24,7 +24,6 @@
 }
 .add-tracker{
   display: inline;
-  margin: 10px auto;
   width: 100%
 }
 .add-tracker-icon{
